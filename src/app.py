@@ -2,6 +2,7 @@ import sys
 import numpy as np
 
 from lib.bsc import BeautifulSoupClient
+from lib.crawler import Crawler
 
 
 url_list = [
@@ -20,7 +21,6 @@ def main(search_type, value):
     url = url_list[value] if search_type == "num" else value
 
     bsc = BeautifulSoupClient(url)
-    bsc.init()
     bsc.parse()
     bsc.check()
 
@@ -29,9 +29,13 @@ def test():
     # sampling some target urls to avoid multiple meaningless web accesses
     for url in np.random.choice(url_list, size=3, replace=False):
         bsc = BeautifulSoupClient(url)
-        bsc.init()
         bsc.parse()
         bsc.check(True)
+
+
+def start_cralwer():
+    crawler = Crawler()
+    crawler.start()
 
 
 args = sys.argv
@@ -57,5 +61,7 @@ if args[1] == "main":
 
 elif args[1] == "test":
     test()
+elif args[2] == "crawl":
+    start_cralwer()
 else:
     raise Exception("Please use correct args")

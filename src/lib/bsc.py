@@ -6,8 +6,6 @@ from bs4 import BeautifulSoup
 class BeautifulSoupClient:
     def __init__(self, url) -> None:
         self.url = url
-
-    def init(self) -> None:
         self.__get_soup()
         self.__get_base_el()
 
