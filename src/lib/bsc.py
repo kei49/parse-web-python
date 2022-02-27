@@ -2,6 +2,24 @@ import requests
 import numpy as np
 from bs4 import BeautifulSoup
 
+from ..common.const import url_list
+
+
+def main(search_type, value):
+    url = url_list[value] if search_type == "num" else value
+
+    bsc = BeautifulSoupClient(url)
+    bsc.parse()
+    bsc.check()
+
+
+def test():
+    # sampling some target urls to avoid multiple meaningless web accesses
+    for url in np.random.choice(url_list, size=3, replace=False):
+        bsc = BeautifulSoupClient(url)
+        bsc.parse()
+        bsc.check(True)
+
 
 class BeautifulSoupClient:
     def __init__(self, url) -> None:
