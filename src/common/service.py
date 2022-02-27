@@ -1,4 +1,4 @@
-from src.db.models import Domain, DomainModel
+from db.models import Domain, DomainModel
 
 
 def create_domain(session, domain_str):

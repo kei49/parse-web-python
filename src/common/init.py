@@ -1,5 +1,5 @@
-from src.db.database import engine, Session
-from src.db.models import Base
+from db.database import engine, Session
+from db.models import Base
 
 
 def init():
