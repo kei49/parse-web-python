@@ -1,11 +1,11 @@
-import re
-
+from typing import Optional
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import validates  # , relationship
 from sqlalchemy.types import BLOB
 from pydantic import BaseModel, constr
 
 from .database import Base
+from util.regex import is_valid_domain, is_valid_url
 
 
 class Domain(Base):
@@ -16,15 +16,7 @@ class Domain(Base):
 
     @validates("domain")
     def validate_domain(self, key, domain):
-        regex = "^((?!-)[A-Za-z0-9-]" + "{1,63}(?<!-)\\.)" + "+[A-Za-z]{2,6}"
-        p = re.compile(regex)
-
-        if domain is None:
-            raise ValueError("ValueError: domain should be not None")
-
-        if(not re.search(p, domain)):
-            raise ValueError("ValueError: not valid domain")
-
+        is_valid_domain(domain)
         return domain
 
 
@@ -35,6 +27,11 @@ class Url(Base):
     domain_id = Column(Integer, ForeignKey("domain.id"), nullable=False)
     linked_from = Column(Integer, ForeignKey("url.id"), nullable=True)
     url = Column(String(128))
+
+    @validates("url")
+    def validate_domain(self, key, url):
+        is_valid_url(url)
+        return url
 
 
 class RawTerms(Base):
@@ -58,7 +55,10 @@ class UrlModel(BaseModel):
     id: int
     domain_id: int
     url: constr()
-    linked_from: int
+    linked_from: Optional[int]
+
+    class Config:
+        orm_mode = True
 
 
 class RawTermsModel(BaseModel):

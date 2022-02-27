@@ -5,13 +5,25 @@ from lib import crawler
 from common.const import url_list
 from common.init import init
 from common.services import domain as domain_service
+from common.services import url as url_service
 
 
 def dev():
-    session = init()
+    init()
 
-    domain_service.create_domain(session, "test.com")
-    domain_service.read_all_domains(session)
+    domain = "fast.com"
+    url = "https://fast.com/"
+
+    domain = domain_service.create_domain(domain)
+
+    domains = domain_service.read_all_domains()
+    print(domains)
+
+    url = url_service.create_url(url, domain.id)
+    print(url)
+
+    urls = url_service.read_all_domains()
+    print(urls)
 
 
 args = sys.argv
