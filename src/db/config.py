@@ -1,1 +1,3 @@
-SQLALCHEMY_DATABASE_URL = "sqlite+pysqlite:///:memory:"
+import os
+
+SQLALCHEMY_DATABASE_URL = os.environ["SQLALCHEMY_DATABASE_URL"]

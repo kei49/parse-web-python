@@ -1,3 +1,9 @@
-from ..db.database import Base, engine
+from src.db.database import engine, Session
+from src.db.models import Base
 
-Base.metadata.create_all(engine)
+
+def init():
+    Base.metadata.create_all(engine)
+    session = Session()
+
+    return session

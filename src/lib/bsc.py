@@ -2,7 +2,7 @@ import requests
 import numpy as np
 from bs4 import BeautifulSoup
 
-from ..common.const import url_list
+from common.const import url_list
 
 
 def main(search_type, value):

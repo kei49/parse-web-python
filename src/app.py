@@ -3,11 +3,22 @@ import sys
 from lib import bsc
 from lib import crawler
 from common.const import url_list
+from common.init import init
+from db import service
+
+
+def dev():
+    session = init()
+
+    service.create_domain(session, "test.com")
+    service.read_all_domains(session)
 
 
 args = sys.argv
 
-if args[1] == "main":
+if args[1] == "dev":
+    dev()
+elif args[1] == "main":
     if len(args) <= 2:
         raise Exception("Please enter one value as int or url")
 
