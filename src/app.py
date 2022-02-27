@@ -4,7 +4,7 @@ from lib import bsc
 from lib import crawler
 from common.const import url_list
 from common.init import init
-from db import service
+from common import service
 
 
 def dev():

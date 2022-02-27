@@ -4,9 +4,16 @@ The backend python applicaiton to parse web urls and fetch most of contents as t
 
 ## Getting Started
 
-### Installation
+### Setup
 
 ```sh
+# git clone
+git clone git@github.com:kei49/parse-web-python.git
+cd parse-web-python
+
+# Prepare .env
+cp .env.sample .env
+
 # Use pipenv
 pipenv shell
 
