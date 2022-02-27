@@ -4,14 +4,14 @@ from lib import bsc
 from lib import crawler
 from common.const import url_list
 from common.init import init
-from common import service
+from common.services import domain as domain_service
 
 
 def dev():
     session = init()
 
-    service.create_domain(session, "test.com")
-    service.read_all_domains(session)
+    domain_service.create_domain(session, "test.com")
+    domain_service.read_all_domains(session)
 
 
 args = sys.argv
